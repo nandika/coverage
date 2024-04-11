@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FindBugsFilter>
+    <!-- false-positive. See details at https://github.com/spotbugs/spotbugs/issues/1601 -->
+    <Match>
+        <Class name="com.example.App"/>
+        <Bug pattern="MS_EXPOSE_REP, EI_EXPOSE_REP"/>
+    </Match>
+</FindBugsFilter>

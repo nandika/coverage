@@ -143,7 +143,46 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.1</version>
+          <version>${maven.compiler.plugin.version}</version>
+          <configuration>
+            <release>17</release>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>${maven.spotbugsplugin.version}</version>
+          <configuration>
+            <effort>Max</effort>
+            <threshold>Low</threshold>
+            <xmlOutput>true</xmlOutput>
+            <spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>
+            <!--Exclude sources-->
+            <excludeFilterFile>${maven.spotbugsplugin.exclude.file}</excludeFilterFile>
+          </configuration>
+          <executions>
+            <execution>
+              <id>analyze-compile</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.11.0.3922</version>
+          <executions>
+            <execution>
+              <id>analyze-compile</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sonar</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -160,14 +199,24 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         </plugin>
+<!--        <plugin>-->
+<!--          <groupId>org.sonarsource.scanner.maven</groupId>-->
+<!--         <artifactId>sonar-maven-plugin</artifactId>-->
+<!--        </plugin>-->
       </plugins>
      </build>
 
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <jacoco.version>0.8.3</jacoco.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <jacoco.version>0.8.8</jacoco.version>
     <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
+    <maven.spotbugsplugin.exclude.file>${basedir}/spotbugs-exclude.xml</maven.spotbugsplugin.exclude.file>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.organization>nandikajayawardana</sonar.organization>
+    <sonar.projectKey>nandikajayawardana</sonar.projectKey>
+    <sonar.moduleKey>nandika_coverage</sonar.moduleKey>
+    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
   </properties>
 </project>
