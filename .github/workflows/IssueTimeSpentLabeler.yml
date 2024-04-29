@@ -1,0 +1,20 @@
+name: Issue days labeler
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 12 * * *'
+
+jobs:
+  days-labeler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: label issue days
+        uses: chipodeil/IssueInProgressDaysLabeler@master
+        with:
+          labels: '["Line: Roadmap", "Line: Technical debt"]'
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          days-mode: "EveryDay"
+          label-to-increment: "This issues assigned {0} days"
+          since-days: "01"
+          auto-cleanup: "true"
