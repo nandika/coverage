@@ -13,7 +13,7 @@ jobs:
         uses: chipodeil/IssueInProgressDaysLabeler@master
         with:
           labels: '["Line: Roadmap", "Line: Technical debt"]'
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: "${{ secrets.MY_TOKEN }}"
           days-mode: "EveryDay"
           label-to-increment: "This issues assigned {0} days"
           since-days: "01"
